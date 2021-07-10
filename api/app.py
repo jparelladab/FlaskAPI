@@ -117,6 +117,13 @@ def update_product(id):
     # we jsonify a python dict
     return product_schema.jsonify(product)
 
+# Delete product
+@app.route('/product/<id>', methods=['DELETE'])
+def delete_product(id):
+    product = Product.query.get(id)
+    db.session.delete(product)
+    db.session.commit()
+    return product_schema.jsonify(product)
 # @app.route('/booklist/v1/', methods=['GET'])
 # def GetAll():
 #     if request.method == "GET":
